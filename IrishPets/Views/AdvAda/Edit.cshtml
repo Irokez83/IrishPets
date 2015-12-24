@@ -1,0 +1,65 @@
+﻿@using IrishPets.Core;
+@model IrishPets.Models.AdvAdaViewModel
+
+@{ ViewBag.Title = $"{Model.Title}"; }
+
+<h3><small> Edit </small> @Model.Title:</h3>
+
+<div class="container-fluid">
+    @using (Html.BeginForm("Edit", "AdvAda", null, FormMethod.Post, new { @class = "ng-pristine ng-invalid ng-invalid-required" }))
+    {
+        <div>
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, null)
+            @Html.HiddenFor(model => Model.State)
+            @Html.HiddenFor(model => model.ReturnUrl)
+
+            @Html.HiddenFor(model => model.Item.DateCreated)
+            @Html.HiddenFor(model => model.Item.DateUpdated)
+
+            <div class="form-group list-optin-details">
+                <div class="row check optin_options">
+                    @Html.LabelFor(model => model.Item.Enabled, new { @class = "col-sm-3" })
+                    <div class="col-sm-8">
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(model => model.Item.Enabled)
+                            @Html.ValidationMessageFor(model => model.Item.Enabled, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="control-label col-md-2">Period of validity:</div>
+                <div class="col-sm-3" id="sandbox-container">
+                    <div class="input-group" id="datepicker">
+                        @Html.EditorFor(model => model.DateShowStart, new { htmlAttributes = new { @class = "input-sm form-control", size = "16", type = "text", placeholder = "Enter start date for advert to show on site" } })
+                        <span class="input-group-addon">to</span>
+                        @Html.EditorFor(model => model.DateShowEnd, new { htmlAttributes = new { @class = "input-sm form-control", size = "16", type = "text", placeholder = "Enter end date for advert to show on site" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.DateShowEnd, null, new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                @Html.LabelFor(model => model.Note, "Description", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-sm-8">
+                    @Html.TextAreaFor(model => model.Note, 15, 30, htmlAttributes: new { @class = "form-control", placeholder = "Description" })
+                    @Html.ValidationMessageFor(model => model.Note, null, new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6 col-md-4">
+                    <a href="/AdvAda/Index" class="btn btn-warning" role="button">&larr; Back</a>
+                    <button type="submit" class="btn btn-success">Save</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+@Styles.Render("~/content/bootstrap-datepicker3.min.css")
+@Scripts.Render("~/Scripts/bootstrap-datepicker.min.js")
+@Scripts.Render("~/Scripts/calendar_ex.js")

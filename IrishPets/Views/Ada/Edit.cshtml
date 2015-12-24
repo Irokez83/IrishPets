@@ -1,0 +1,35 @@
+﻿@model IrishPets.Models.ContactInfoViewModel2
+
+<h3>
+    <small> Edit </small> User's Profile:
+</h3>
+
+@using (Html.BeginForm("ChangeInfo", "Manage", new { returnUrl="/Ada/Index"}))
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        @Html.ValidationSummary(true, string.Empty)
+
+        @Html.Partial("ContactInfoEdit2", Model)
+
+        <div class="row">
+            @Html.LabelFor(model => model.EmailConfirmed, new { @class = "control-label col-md-2" })
+            <div class="col-md-10 checkbox">
+                @Html.CheckBoxFor(model => model.EmailConfirmed)
+                @Html.ValidationMessageFor(model => model.EmailConfirmed, null, new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 col-md-4">
+                <a class="btn btn-warning" role="button" href="/Ada/Index">&larr; Back</a>
+                <input class="btn btn-success" role="button" type="submit" value="Save" />
+            </div>
+        </div>
+
+    </div>
+
+    <div class="help-block">Last login: @Html.DisplayFor(model => model.DateOfLastLogin)</div>
+}
+

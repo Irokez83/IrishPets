@@ -1,0 +1,55 @@
+﻿@{ ViewBag.Title = "Services"; }
+
+@model IrishPets.Models.PetServiceViewModel
+
+<div class="row">
+    <h3>
+        Pet Service:
+        @if (User.IsInRole("Admin"))
+        {
+            @Html.ActionLink("Create New", "Create", "PetService", null, new { @class = "btn btn-success btn-xs", role = "button" })
+        }
+    </h3>
+
+    @using (Html.BeginForm())
+    {
+        <div class="panel-group modal-content">
+            <button type="submit" class="btn btn-success">Filter</button>
+
+            <div class="col-sm-6">
+                <strong>Text to find</strong>:
+                @Html.TextBox("q", null, new { @class = "form-control", @placeholder = "Text of filter" })
+            </div>
+
+            <div class="col-sm-2">
+                <strong>County</strong>:
+                @Html.DropDownListFor(model => model.CountyId, Model.Counties, "All Counties", new { @class = "form-control" })
+            </div>
+        </div>
+    }
+</div>
+
+<hr class="featurette-divider">
+
+@foreach (var item in Model.Services)
+{
+    <div class="row thumbnail">
+        <h4>
+            @if (User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Remove", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-xs", role = "button" })
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-success btn-xs", role = "button" })
+            }
+
+            @Html.ActionLink(item.Name, "Details", new { id = item.Id })
+        </h4>
+
+        <address>
+            <abbr title="Phone">Phone:</abbr> <strong>@Html.DisplayFor(model => item.PhoneNumber)</strong>
+            <abbr title="E-mail">E-mail:</abbr> <strong>@Html.DisplayFor(model => item.Email)</strong>
+            <div>@Html.DisplayFor(model => item.Address)</div>
+        </address>
+
+        <div class="body-content">@Html.Raw(item.Note)</div>
+    </div>
+}

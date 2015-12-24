@@ -1,0 +1,47 @@
+﻿@using IrishPets.Core
+@model IrishPets.Models.PetImage
+
+@{
+    ViewBag.Title = "Upload picture";
+
+    var __imageThumbPath = string.Empty;
+
+}
+
+@using (Html.BeginForm("ImageLoad", null, FormMethod.Post, new { enctype = "multipart/form-data"}))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => Model.PetId)
+    @Html.HiddenFor(model => Model.ReturnUrl)
+
+    <fieldset>
+        <legend>Load image</legend>
+
+        @Html.HiddenFor(model => Model.ReturnUrl)
+        
+        @*<div class="editor-label">Name</div>*@
+        <div class="editor-field">
+            @*@Html.EditorFor(model => model.Name)*@
+            @Html.HiddenFor(model => model.Name)
+        </div>
+
+
+        <div class="editor-label">Image file @Html.CheckBoxFor(model => model.IsAvatar)</div>
+        @*<div class="editor-label">Set this picture</div>*@
+        @*<div class="editor-field">@Html.CheckBoxFor(model => model.IsAvatar)</div>*@
+        <div class="editor-field">
+            <input type="file" name="UploadImage" />
+        </div>
+        
+        <p>
+           <a href="@Model.ReturnUrl" class="btn btn-default" role="button">Back</a>
+           <input type="submit" value="Load" class = "btn btn-default" role = "button" />
+        </p>
+
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

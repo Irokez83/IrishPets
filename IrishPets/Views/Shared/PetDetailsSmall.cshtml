@@ -1,0 +1,16 @@
+﻿@model IrishPets.Models.Pet
+
+<div class="pet_sidebar pet_details_bubble">
+    @*<div class="pet_bubble hidden-xs"><img src="~/Content/Images/pet_bubbles.png" width="73" height="67" alt="pet bubbles"></div>*@
+    @*<u class="caption_pet">Pet info</u>:*@
+    @*@Html.ActionLink(" Edit ", "Edit", new { id = Model.Id }, new { @class = "btn btn-success btn-xs", role = "button" })*@
+
+    <div>My name is <strong class="blue_highlight">@Html.DisplayFor(model => Model.Name)</strong></div>
+    <div>Kind: @Html.DisplayFor(model => Model.Breed.Kind.Name)</div>
+    <div>Breed: <mark class="blue_highlight">@Html.DisplayFor(model => Model.Breed.Name)</mark></div>
+    <div>D.O.B: @Html.DisplayFor(model => Model.DateOfBirth)</div>
+    <div>Coat colour: @Html.DisplayFor(model => Model.CoatColour)</div>
+    <div>Weight: @Html.DisplayFor(model => Model.Weight)</div>
+    <div>Sex: @Html.DisplayFor(model => Model.Gender)</div>
+    @*<div>ID#: @Html.DisplayFor(model => Model.Id)</div>*@
+</div>

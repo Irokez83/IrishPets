@@ -1,0 +1,63 @@
+﻿@model IrishPets.Models.PetAdvsEditViewModel
+
+<div class="form-group">
+    @Html.HiddenFor(model => model.Advert.Id)
+    @Html.HiddenFor(model => model.Advert.PetId)
+    @Html.HiddenFor(model => model.Advert.Type)
+
+    @if (@Model.Advert.Type == IrishPets.Models.AdvertType.Notification_Advert)
+    {
+        if (User.IsInRole("Admin"))
+        {
+            <div class="row">
+                @Html.LabelFor(model => model.Advert.TypeOfSale, "Type of Sale", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EnumDropDownListFor(model => model.Advert.TypeOfSale, null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Advert.TypeOfSale, null, new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+
+        <div class="row">
+            @Html.LabelFor(model => model.Advert.FirstPrice, "Your price", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Advert.FirstPrice, new { htmlAttributes = new { @class = "form-control", placeholder = "Price" } })
+                @Html.ValidationMessageFor(model => model.Advert.FirstPrice, null, new { @class = "text-danger" })
+            </div>
+        </div>
+    }
+
+    <div class="row">
+        <div class="control-label col-md-2">Period of validity:</div>
+        <div class="col-md-3" id="sandbox-container">
+            <div class="input-group" id="datepicker">
+                @Html.EditorFor(model => model.Advert.DateShowStart, new { htmlAttributes = new { @class = "input-sm form-control", size = "16", type = "text", placeholder = "Enter start date for advert to show on site" } })
+                @Html.ValidationMessageFor(model => model.Advert.DateShowStart, null, new { @class = "text-danger" })
+                <span class="input-group-addon">to</span>
+                @Html.EditorFor(model => model.Advert.DateShowEnd, new { htmlAttributes = new { @class = "input-sm form-control", size = "16", type = "text", placeholder = "Enter end date for advert to show on site" } })
+                @Html.ValidationMessageFor(model => model.Advert.DateShowEnd, null, new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(model => model.Advert.Name, "Title", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Advert.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "Short description" } })
+            @Html.ValidationMessageFor(model => model.Advert.Name, string.Empty, new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(model => model.Advert.Note, "Description", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Advert.Note, 15, 30, htmlAttributes: new { @class = "form-control", placeholder = "Description" })
+            @Html.ValidationMessageFor(model => model.Advert.Note, string.Empty, new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+@Styles.Render("~/content/bootstrap-datepicker3.min.css")
+@Scripts.Render("~/Scripts/bootstrap-datepicker.min.js")
+@Scripts.Render("~/Scripts/calendar_ex.js")

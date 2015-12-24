@@ -1,0 +1,30 @@
+﻿@model IrishPets.Models.PetAdvsViewModel
+
+<div>
+    @using (Html.BeginForm())
+    {
+        <div class="panel-group modal-content">
+            <button type="submit" class="btn btn-success">Filter</button>
+
+            <div class="col-sm-2">
+                <strong>Sort by</strong>:
+                @Html.EnumDropDownListFor(model => model.Sort, null, new { @class = "form-control" })
+            </div>
+
+            <div class="col-sm-3">
+                <strong>Text to find</strong>:
+                @Html.TextBox("q", null, new { @class = "form-control", @placeholder = "Text to find" })
+            </div>
+
+            <div class="col-sm-2">
+                <strong>Pet kind</strong>:
+                @Html.DropDownListFor(model => model.KindId, Model.Kinds, "All Kinds", new { @class = "form-control" })
+            </div>
+
+            <div class="col-sm-2">
+                <strong>County</strong>:
+                @Html.DropDownListFor(model => model.CountyId, Model.Counties, "All Counties", new { @class = "form-control" })
+            </div>
+        </div>
+    }
+</div>

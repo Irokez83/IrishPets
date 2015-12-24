@@ -1,0 +1,54 @@
+﻿@using System.Linq;
+@using IrishPets.Core;
+@model IrishPets.Models.PetAdvsViewModel
+
+@{ ViewBag.Title = @Model.AdvertType.DisplayName(); }
+
+<div class="row background_bubbles">
+    <h3>
+        <small>  </small> @Model.AdvertType.DisplayName():
+        @Html.ActionLink("Create New Ad", "WizEdit", "Adv", routeValues: new { t = (int)Model.AdvertType }, htmlAttributes: new { @class = "btn btn-success", role = "button" })
+    </h3>
+</div>
+
+<div class="row">@Html.Partial("PetFilter", Model)</div>
+
+@foreach (var item in Model.PetAdverts)
+{
+    <div class="row featurette">
+        <div class="row col-sm-10 modal-content" style="position: relative; transition: background .2s;">
+            @if (item.TypeOfSale == IrishPets.Models.TypeOfSale.Commercial)
+                {
+                <div class="highlight_dd">
+                    <div>
+                        <h3 style="margin-left:20px; margin-top:15px;">@Html.ActionLink(item.Name, "Details", new { id = item.Id, t = (int)Model.AdvertType })</h3>
+                        <p>@Html.Raw(item.Note?.Replace(Environment.NewLine, "<br/>"))</p>
+                    </div>
+
+                    <div class="row highlight_dd_IrishStamp">
+                        <div class="col-sm-5">@Html.Partial("PetImage", item.Pet)</div>
+                        <div class="col-sm-4 thumbnail">@Html.Partial("PetDetailsSmall", item.Pet)</div>
+                        <div class="col-sm-2 thumbnail">@Html.Partial("PetAdvertDetailsSmall", item)</div>
+                    </div>
+                    <div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div style="border: 1px solid rgb(0, 255, 33); position: relative; transition: background .2s; border-radius: 1px; border-radius: 5px; margin-top: 5px; margin-bottom:5px;">
+                    <div style="margin-left:5px">
+                        <strong>@Html.ActionLink(item.Name, "Details", new { id = item.Id, t = (int)Model.AdvertType })</strong>
+                        <p>@Html.Raw(item.Note?.Replace(System.Environment.NewLine, "<br/>"))</p>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-5">@Html.Partial("PetImage", item.Pet)</div>
+                        <div class="col-sm-4 thumbnail">@Html.Partial("PetDetailsSmall", item.Pet)</div>
+                        <div class="col-sm-2 thumbnail">@Html.Partial("PetAdvertDetailsSmall", item)</div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

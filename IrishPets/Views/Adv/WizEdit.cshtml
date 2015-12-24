@@ -1,0 +1,67 @@
+﻿@using IrishPets.Core;
+@model IrishPets.Models.PetAdvsEditViewModel
+
+@{ ViewBag.Title = "Wizard " + Model.Title + " " + Model.AdvertType.DisplayName(); }
+
+<div class="row  background_bubbles">
+    <h3>
+        <small> @Model.Title </small> @Model.AdvertType.DisplayName():
+        <a href="@Model.ReturnUrl" class="btn btn-warning btn-xs" role="button">&larr; Back</a>
+    </h3>
+
+</div>
+
+<div class="container-fluid">
+    <div class="page-header">
+        <span class="title-icon-circle">1</span>
+        @Html.Partial("PetOwnerContactData", Model.Member)
+    </div>
+
+    @if (Model.Member.IsValidContactInfo)
+    {
+        <div class="alert alert-danger"><b>Oh snap!</b> You have to update contact info: <b>E-mail</b> or <b>PhoneNumber</b> @Html.ActionLink(" click here.", "WizContactInfoEdit"). Continue afterwards.</div>
+    }
+    else
+    {
+        <div class="help-block alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong>Well done!</strong> Your contact details are up to date.
+        </div>
+
+        if (null == Model.Pet)
+        {
+            <div class="page-header"><h3 class="small-title"><span class="title-icon-circle">2</span> Info:</h3></div>
+                <div class="alert alert-warning"> Add new Pet? @Html.ActionLink(" click here.", "WizPetEdit", new { t = (int)Model.AdvertType })</div>
+        }
+        else
+        {
+            <div class="page-header">
+                <div>
+                    <span class="title-icon-circle">2</span> Info about your Pet. If you want to
+                    @Html.Partial("SelectAnotherPet", Model)
+                </div>
+            </div>
+
+                <br /><div class="page-header"><div><span class="title-icon-circle">3</span> Your advert:</div></div>
+
+            using (Html.BeginForm("WizEdit", "Adv", new { t = (int)Model.AdvertType }))
+            {
+                <div>
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(false)
+                    @Html.HiddenFor(model => Model.State)
+                    @Html.HiddenFor(model => model.AdvertType)
+                    @Html.HiddenFor(model => model.ReturnUrl)
+                    @Html.Partial("PetAdvertEdit2", Model)
+
+                    <div class="row">
+                        <div class="col-sm-6 col-md-4">
+                            <a href="@Model.ReturnUrl" class="btn btn-warning" role="button">&larr; Back</a>
+                            <button type="submit" class="btn btn-success">Save</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    }
+</div>

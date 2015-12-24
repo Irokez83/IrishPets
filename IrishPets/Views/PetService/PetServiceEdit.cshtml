@@ -1,0 +1,89 @@
+﻿@model IrishPets.Models.PetService
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, null, new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="row">
+        @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, null, new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(model => model.Note, "Description", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Note, 15, 30, htmlAttributes: new { @class = "form-control", placeholder = "Description" })
+            @Html.ValidationMessageFor(model => model.Note, string.Empty, new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <h4 class="list-group-item-heading">Contact:</h4>
+
+
+    <div class="row">
+        @Html.LabelFor(model => model.Email, new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-4">
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email" } })
+            @Html.ValidationMessageFor(model => model.Email, string.Empty, new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="row">
+        @Html.LabelFor(model => model.PhoneNumber, new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-4">
+            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Phone Number" } })
+            @Html.ValidationMessageFor(model => model.PhoneNumber, string.Empty, new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(model => model.Postcode, new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.Postcode, new { htmlAttributes = new { @class = "form-control", placeholder = "Postcode" } })
+            @Html.ValidationMessageFor(model => model.Postcode, string.Empty, new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(model => model.HouseNameNo, new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.HouseNameNo, new { htmlAttributes = new { @class = "form-control", placeholder = "HouseName/№" } })
+            @Html.ValidationMessageFor(model => model.HouseNameNo, string.Empty, new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(model => model.Street, new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.Street, new { htmlAttributes = new { @class = "form-control", placeholder = "Street" } })
+            @Html.ValidationMessageFor(model => model.Street, string.Empty, new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(model => model.Town, null, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-5">
+            @Html.EditorFor(model => model.Town, new { htmlAttributes = new { @class = "form-control", placeholder = "Town" } })
+            @Html.ValidationMessageFor(model => model.Town, string.Empty, new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(model => model.County, null, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-5">
+            @Html.DropDownListFor(model => model.CountyId, Model.Counties, "Please select a County", new { @class = "form-control", placeholder = "County" })
+        </div>
+    </div>
+
+
+    <div class="row">
+        @Html.LabelFor(model => model.DateUpdated, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.DateUpdated, new { @class = "form-control" })
+        </div>
+    </div>
+</div>

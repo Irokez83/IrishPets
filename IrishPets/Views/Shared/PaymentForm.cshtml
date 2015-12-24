@@ -1,0 +1,28 @@
+﻿@model IrishPets.Models.PetAdvert
+
+<form action="@IrishPets.Properties.Resources.PayPal_Site" enctype="multipart/form-data" method="post"  target="_blank">
+
+    @Html.Hidden("cmd", "_s-xclick")
+    @Html.Hidden("business", @IrishPets.Properties.Resources.PayPal_Email_Facilitator)
+    @Html.Hidden("item_name", Model.Name + " #" + Model.Id + " " + Model.DateUpdated, new { @id = "paypalItemName" })
+
+    @Html.Hidden("amount", Model.FirstPrice, new { @id = "paypalAmmount" })
+    @Html.Hidden("currency_code", "EUR")
+
+    @Html.Hidden("Capability", "IncontextCheckout")
+    @Html.Hidden("hosted_button_id", "4GRPHTK46J6GL")
+
+    @Html.Hidden("notify_url", @IrishPets.Properties.Resources.PayPal_ReturnUrl + "Payment/IPN")
+    @Html.Hidden("cancel_return", @IrishPets.Properties.Resources.PayPal_ReturnUrl + "cart/Failure?returnUrl=/Adv/Details/" + Model.Id + "&Id=" + (int)Model.Id + "&t=" + (int)Model.Type + "&end")
+    @Html.Hidden("return", @IrishPets.Properties.Resources.PayPal_ReturnUrl + "Payment/Success?returnUrl=/Adv/Details/" + Model.Id + "&Id=" + (int)Model.Id + "&t=" + (int)Model.Type + "&end")
+
+
+    <input type="hidden" name="lc" value="IE">
+    <input type="hidden" name="bn" value="PP-BuyNowBF">
+
+    <input type="image"
+           src="https://www.sandbox.paypal.com/en_US/i/btn/btn_donate_LG.gif"
+           align="left" style="margin-right: 7px;" />
+    <img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+
+</form>

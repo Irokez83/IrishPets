@@ -1,0 +1,84 @@
+﻿@using IrishPets.Core;
+@model IrishPets.Models.PetAdvert
+
+@{ ViewBag.Title = "Details " + @Model.Type.DisplayName(); }
+
+<div class="row background_bubbles">
+    <div id="heading">
+        <h3><small> Details </small>  @Model.Type.DisplayName():
+            @Html.ActionLink("← Back", "Index", new { t = (int)Model.Type }, new { @class = "btn btn-warning btn-xs", role = "button" })
+
+            @if (Model.Pet.IsOwner(User))
+            {
+                @Html.ActionLink(" Edit ", "WizEdit", new { id = Model.Id, t = (int)Model.Type }, new { @class = "btn btn-success btn-xs", role = "button" })
+                @Html.ActionLink(" Remove ", "WizRemove", new { id = Model.Id, t = (int)Model.Type }, new { @class = "btn btn-danger btn-xs", role = "button" })
+            }
+        </h3>
+    </div>
+</div>
+
+<div class="row featurette">
+    <div class="col-sm-10 col-sm-12">
+        @if (Model.TypeOfSale == IrishPets.Models.TypeOfSale.Commercial)
+        {
+            <div class="highlight_dd">
+                @*<div style="position: absolute; top:45px; left: -9px; width: 44px; height: 44px;">
+                    <image class="svg-icon" style="display: block; height: 100%; width: 100%; transform: rotate(-45deg);" src="~/Content/Images/announcement_corner.png" />
+                </div>*@
+                <h3 class="blue_highlight" style="margin-left: 14px;">@Html.DisplayFor(model => Model.Name)</h3>
+                <p class="body-content">@Html.Raw(Model.Note?.Replace(System.Environment.NewLine, "<br/>"))</p>
+            </div>
+        }
+        else
+        {
+            <div style="border: 1px solid rgb(0, 255, 33); position: relative; transition: background .2s; border-radius: 1px; border-radius: 5px; margin-top: 5px; margin-bottom:5px;">
+                    <h3 class="blue_highlight" style="margin-left: 14px;">@Html.DisplayFor(model => Model.Name)</h3>
+                    <p class="body-content">@Html.Raw(Model.Note?.Replace(System.Environment.NewLine, "<br/>"))</p>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-5">@Html.Partial("PetImage", Model.Pet)</div>
+    <div class="col-sm-4 thumbnail">@Html.Raw(Model.Pet.Note?.Replace(System.Environment.NewLine, "<br />"))</div>
+</div>
+
+<div class="row highlight_dd_IrishStamp">
+    <div class="col-sm-4 thumbnail">
+        @if (Model.Pet.IsOwner(User))
+        {
+            @Html.ActionLink(" Edit ", "WizPetEdit", new { p = Model.Pet.Id, t = (int)Model.Type }, new { @class = "btn btn-success btn-xs", role = "button" })
+        }
+        @Html.Partial("PetDetailsSmall", Model.Pet)
+        <br />
+    </div>
+
+    <div class="col-sm-5 thumbnail">
+        @if (Model.Pet.IsOwner(User))
+        {
+            @Html.ActionLink(" Edit ", "WizContactInfoEdit", new { id = Model.Id, t = (int)Model.Type }, new { @class = "btn btn-success btn-xs", role = "button" })
+        }
+        @Html.Partial("PetOwnerContactData", Model.Pet.Member)
+    </div>
+
+    <div class="col-sm-4 thumbnail">
+        @if (Model.Pet.IsOwner(User))
+        {
+            @Html.ActionLink(" Edit ", "WizEdit", new { id = Model.Id, t = (int)Model.Type }, new { @class = "btn btn-success btn-xs", role = "button" })
+        }
+
+        @Html.Partial("PetAdvertDetailsSmall", Model)
+        <br />
+        @if (Model.Pet.IsOwner(User) && Model.TypeOfSale != IrishPets.Models.TypeOfSale.Commercial)
+        {
+            @Html.Partial("PaymentForm", Model)
+        }
+    </div>
+</div>
+
+
+<div class="row featurette">
+    <hr class="featurette-divider">
+    @Html.Partial("PetReviews", Model.Pet)
+</div>

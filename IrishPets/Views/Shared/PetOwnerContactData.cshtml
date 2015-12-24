@@ -1,0 +1,15 @@
+﻿@model IrishPets.Models.Member
+
+<div class="pet_sidebar">
+    <u>Contact info</u>:
+    <div>Name: <strong>@Html.DisplayFor(model => Model.FirstName)</strong>, </div>
+    <div>Surname: <strong>@Html.DisplayFor(model => model.Surname)</strong>, </div>
+    @* <div>Date of Birth: @Html.DisplayFor(model => model.DateOfBirth)</div> *@
+    <address>
+        <div>Phone: <strong>@Html.DisplayFor(model => model.PhoneNumber)</strong></div>
+        <div>E-mail: <strong>@Html.DisplayFor(model => model.Email)</strong></div><br />
+        <div>Address: <strong>@Html.DisplayFor(model => model.Address)</strong></div>
+    </address>
+
+    <small>Last login: @Html.DisplayFor(model => model.DateOfLastLogin)</small>
+</div>

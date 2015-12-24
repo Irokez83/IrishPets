@@ -1,0 +1,68 @@
+﻿@model IrishPets.Models.PetAdvsEditViewModel
+
+@Html.ActionLink(" Create new Pet ", "WizPetEdit", new { t = (int)Model.AdvertType }, new { @class = "btn btn-primary btn-xs", role = "button" })
+
+
+@if (null != Model.Pet)
+{
+    @Html.ActionLink(" Edit Pet ", "WizPetEdit", new { p = Model.Pet.Id, t = (int)Model.AdvertType }, new { @class = "btn btn-success btn-xs", @id="btnPetEdit", role = "button" })
+}
+
+@if (0 < @Model.Pets.Count)
+{
+    <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#selectAnotherPetModal" data-original-title="Select another Pet">Select another Pet</button>
+    
+    <div id="selectAnotherPetModal" class="modal" tabindex="-1" aria-labelledby="selectAnotherPetModalLabel" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="modalRemoveLabel">Select another pet</h4>
+                </div>
+
+                <form>@Html.LabelFor(model => model.Pets, null, htmlAttributes: new { @class = "control-label col-md-4" })
+                    @Html.DropDownListFor(model => Model.PetId, Model.Pets, "Please select a Pet", new { @class = "form-control", @id = "ddlPet" })
+                </form>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input id="selectPetBtn1111" type="submit" class="btn btn-success" value="Select" data-dismiss="modal" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="PetDetailsSmallUpdate">@Html.Partial("PetDetailsSmallUpdate", Model.Pet)</div>
+
+    @Scripts.Render("~/bundles/jquery")
+    <script>
+        $('#selectPetBtn1111').click(function (e) {
+            var __id = $("#ddlPet").val();
+
+            $.ajax({
+                type: "Post"
+                , data: { PetId: __id }
+                , datatype: "json"
+                , url: "/Adv/WizPetSelectAnother"
+                , success: function (data) {
+                    $("#PetDetailsSmallUpdate").html(data);
+                    $("#PetId").val(__id);
+                    $('#Advert_PetId').val(__id);
+
+                    var __obj = $('#ReturnUrl');
+                    var __url = __obj.val();
+
+                    $.get("/Adv/GetString"
+                        , { t: __url, p: __id }
+                        , function (obj)
+                        {
+                            $("#btnPetEdit").attr("href", obj)
+                        }
+                    );
+                }
+                , error: function (_ex) { alert("Failed (ERROR!) " + _ex.statusText + "  " + _ex.statusCode + "  " + _ex.responseText); }
+            });
+        });
+
+    </script>
+}

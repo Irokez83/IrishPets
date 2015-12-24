@@ -1,0 +1,28 @@
+﻿@model IrishPets.Models.PetEditViewModel
+@{
+    ViewBag.Title = "Edit Pet";
+}
+
+<div class="row  background_bubbles">
+    <h3>
+        <small> Edit </small> Pet:
+        <a class="btn btn-warning btn-xs" role="button" href="@Model.ReturnUrl">&larr; Back</a>
+    </h3>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div>
+        @Html.ValidationSummary(true, string.Empty)
+
+        @Html.Partial("PetEdit")
+
+        <div class="row">
+            <div class="col-sm-6 col-md-4">
+                <a class="btn btn-warning" role="button" href="@Model.ReturnUrl">&larr; Back</a>
+                <button type="submit" class="btn btn-success"> Save </button>
+            </div>
+        </div>
+    </div>
+}

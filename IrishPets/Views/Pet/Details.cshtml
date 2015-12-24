@@ -1,0 +1,66 @@
+﻿@using IrishPets.Core;
+@model IrishPets.Models.Pet
+
+@{ ViewBag.Title = "Pet Details " + Model.Name; }
+
+<div class="row  background_bubbles">
+    <h3>
+        Pet details:
+        <a href="~/Pet/Index" class="btn btn-warning btn-xs" role="button">← Back to list</a>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-success btn-xs", role = "button" })
+        @Html.ActionLink("Remove", "Remove", new { id = Model.Id }, new { @class = "btn btn-danger btn-xs", role = "button" })
+    </h3>
+</div>
+
+<div class="row">
+    <div class="col-sm-3 thumbnail">
+            @Html.Partial("PetDetailsSmall", Model)
+    </div>
+
+    <div class="col-sm-4 thumbnail">@Html.Partial("PetImage", Model)</div>
+    @if (!string.IsNullOrEmpty(Model.Note))
+    {
+        <div class="col-sm-4 thumbnail">
+            @Html.Raw(Model.Note?.Replace(System.Environment.NewLine, "<br/>"))
+        </div>
+    }
+
+</div>
+
+<div class="container">
+    <hr class="featurette-divider" />
+
+    <h4>
+        Adverts:
+        @Html.ActionLink("New General Ad", "WizEdit", "Adv", new { p = Model.Id, t = (int)IrishPets.Models.AdvertType.Notification_Advert }, htmlAttributes: new { @class = "btn btn-success btn-xs", type = "button" })
+        @Html.ActionLink("New Breeding Ad", "WizEdit", "Adv", new { p = Model.Id, t = (int)IrishPets.Models.AdvertType.Notification_Breeding }, htmlAttributes: new { @class = "btn btn-info btn-xs", type = "button" })
+        @Html.ActionLink("New Lost & Found Ad", "WizEdit", "Adv", new { p = Model.Id, t = (int)IrishPets.Models.AdvertType.Notification_LostAndFound }, htmlAttributes: new { @class = "btn btn-primary btn-xs", type = "button" })
+    </h4>
+
+    @foreach (var item in Model.Adverts)
+    {
+        <hr class="featurette-divider" />
+
+            <div class="row featurette">
+                <div style="border: 1px solid rgb(0, 255, 33); position: relative; transition: background .2s; border-radius: 1px; border-radius: 5px; margin-top: 5px; margin-bottom:5px;">
+                    <div style="margin-left:5px">
+                        @Html.ActionLink("Remove", "WizRemove", "Adv", new { id = item.Id, t = (int)item.Type }, htmlAttributes: new { @class = "btn btn-danger btn-xs", type = "button" })
+                        @Html.ActionLink("Edit", "WizEdit", "Adv", new { id = item.Id, t = (int)item.Type }, htmlAttributes: new { @class = "btn btn-success btn-xs", type = "button" })
+
+                        #@item.Id <small>@item.Type.DisplayName()</small>
+
+                        <strong>@Html.ActionLink(item.Name, "Details", "Adv", routeValues: new { id = item.Id, t = (int)item.Type }, htmlAttributes: new { })</strong>
+                        <p>@Html.Raw(item.Note.Replace(System.Environment.NewLine, "<br/>"))</p>
+                        @Html.Partial("PetAdvertDetailsSmall", item)
+                    </div>
+                </div>
+            </div>
+    }
+
+</div>
+
+
+<div class="row featurette">
+    <hr class="featurette-divider" />
+    @Html.Partial("PetReviews", Model)
+</div>

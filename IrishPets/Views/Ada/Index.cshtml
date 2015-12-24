@@ -1,0 +1,43 @@
+﻿@using System.Linq;
+@model IrishPets.Models.MemberViewModel
+
+
+<br/>
+@using (Html.BeginForm())
+{
+    <div class="panel-group modal-content">
+        <button type="submit" class="btn btn-success">Filter</button>
+
+        <div class="col-sm-2">
+            <strong>Sort by</strong>:
+            @Html.EnumDropDownListFor(model => model.Sort, null, new { @class = "form-control" })
+        </div>
+
+        <div class="col-sm-3">
+            <strong>Text to find</strong>:
+            @Html.TextBox("q", null, new { @class = "form-control", @placeholder = "Text of filter" })
+        </div>
+
+        <div class="col-sm-2">
+            <strong>County</strong>:
+            @Html.DropDownListFor(model => model.CountyId, Model.Counties, "All Counties", new { @class = "form-control" })
+        </div>
+    </div>
+}
+
+<br />
+
+@foreach (var item in Model.Members)
+{
+    <div class="row">
+        <div class="thumbnail">
+            @Html.ActionLink("Remove", "Remove", "Ada", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-danger btn-xs", type = "button" })
+            | @Html.ActionLink("Edit", "Edit", "Ada", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-success btn-xs", type = "button" })
+
+
+            @Html.Partial("PetOwnerContactData", item)
+
+            Email Confirmed: @Html.CheckBoxFor(model => item.EmailConfirmed, new { disabled = "disabled" })
+        </div>
+    </div>
+}

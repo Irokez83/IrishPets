@@ -1,0 +1,39 @@
+﻿
+@model List<IrishPets.Models.PetImage>
+
+@{
+    ViewBag.Title = "Pet images";
+}
+
+<div class="container">
+    <hr />
+
+    @foreach (var item in Model)
+    {
+        <div class="row thumbnail">
+
+            <div class="col-sm-5">
+                @Html.Raw("<img style='width:300px; height:200px;' src=\"data:image/jpeg;base64," + Convert.ToBase64String(item.Image) + "\" />")
+            </div>
+
+            <div class="col-sm-5">
+                @Html.ActionLink("Remove Image", "PetImageRemove", new { id = item.Id }, new { @class = "btn btn-danger btn-xs", role = "button" })
+                #@Html.DisplayFor(model => item.Id, new { @class = "panel-body" }) <small>@Html.CheckBoxFor(model => item.IsAvatar, new { @class = "panel-body", disabled = "disabled" }) Is main picture of pet</small>
+                <br />
+                <br />
+
+                @Html.ActionLink("View Pet", "Details", "Pet", new { id = item.Pet.Id }, htmlAttributes: new { @class = "btn btn-success btn-xs", type = "button" })
+                #@Html.DisplayFor(model => item.Pet.Id, new { @class = "panel-body" })
+                <strong>@Html.DisplayFor(model => item.Pet.Name, new { @class = "panel-body" })</strong>
+
+                <div>
+                    @Html.ActionLink("Edit contact Info", "Edit", "Ada", new { id = item.Pet.Member.Id }, htmlAttributes: new { @class = "btn btn-info btn-xs", type = "button" })
+                    <strong>@Html.DisplayFor(model => item.Pet.Member.Email, new { @class = "panel-body" })</strong> <small>(last login: @Html.DisplayFor(model => item.Pet.Member.DateOfLastLogin, new { @class = "panel-body" }))</small>
+                </div>
+                <br />
+
+                <div>@Html.DisplayFor(model => item.Name, new { @class = "panel-body" })</div>
+            </div>
+        </div>
+    }
+</div>

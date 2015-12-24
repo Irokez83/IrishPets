@@ -1,0 +1,24 @@
+﻿@model IrishPets.Models.ContactInfoViewModel2
+
+@{
+    ViewBag.Title = "Edit profile";
+    string returnUrl = ViewBag.ReturnUrl;
+}
+
+<h2>Edit your profile</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        @Html.ValidationSummary(true, string.Empty)
+        @Html.Partial("ContactInfoEdit2", Model)
+
+        <div>
+            <a class="btn btn-default" role="button" href="@returnUrl">Back</a>
+            <input class="btn btn-default" role="button"  type="submit" value="Save" />
+        </div>
+    </div>
+    <div class="help-block">Last login: @Html.DisplayFor(model => model.DateOfLastLogin)</div>
+}

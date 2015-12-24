@@ -1,0 +1,139 @@
+﻿@using System.Linq
+@model  IrishPets.Models.Pet
+
+
+@if (Request.IsAuthenticated)
+{
+    <h4>Comments: <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#reviewModal" data-original-title="New Review" onclick="reviewEditBtn_Click(-1)">New Comment</button></h4>
+
+    <div id="reviewModal" class="modal" tabindex="-1" aria-labelledby="reviewModalLabel" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="modalLabel">Review</h4>
+                </div>
+
+                <form role="form">
+                    <div class="modal-body">@Html.TextAreaFor(model => Model.Note, 20, 100, new { @id = "message-text", @class = "form-control", @style = "max-width: 100%;" })</div>
+                </form>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Close</button>
+                    <button id="reviewSaveBtn" type="button" class="btn btn-success btn-xs" data-dismiss="modal">Save review</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="reviewRemoveModal" class="modal" tabindex="-1" aria-labelledby="reviewRemoveModalLabel" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="modalRemoveLabel">Remove review</h4>
+                </div>
+
+                <form role="form">
+                    <div id="message-text-remove" class="modal-body"></div>
+                </form>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Close</button>
+                    <button id="reviewRemoveBtn" type="button" class="btn btn-danger btn-xs" data-dismiss="modal">Remove review</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+
+    <script>
+        $('#reviewSaveBtn').click(function (e)
+        {
+            var __item = $('#message-text');
+            var __id = __item.attr("data-id");
+            var __isEdit = __item.attr("data-IsEdit");
+
+            $.ajax({
+                type: "Post"
+                , data: { PetId: @Model.Id, Note: __item.text(), Id: __id, IsEdit: __isEdit }
+                , datatype: "json"
+                , url: "/Adv/WizReviewEdit"
+                , success: function (data) {
+                    
+                    if (__isEdit == "true") {
+                        var __itemCS = $("#review_" + __id);
+                        __itemCS.empty();
+                        __itemCS.html(data);
+                    }
+                    else
+                    {
+                        $("#addNewReview").after(data);
+                    }
+                }
+                , error: function (_ex) { alert("Failed (Your comment wasn't saved!) " + _ex.statusText+"  "+_ex.statusCode + "  "+_ex.responseText); }
+            });
+        });
+
+        function reviewEditBtn_Click(__id)
+        {
+            var __item = $('#message-text');
+            __item.empty();
+            __item.append($('#note_' + __id).text());
+
+            __item.attr("data-id", __id);
+            if(-1== __id)
+            {
+                __item.attr("data-IsEdit", false);
+                $('#modalLabel').text("Create new review");
+            }
+            else
+            {
+                __item.attr("data-IsEdit", true);
+                $('#modalLabel').text("Edit review #"+__id);
+            }
+        }
+
+
+        $('#reviewRemoveBtn').click(function (e)
+        {
+            var __item = $('#message-text-remove');
+            var __id = __item.attr("data-id");
+
+
+            $.ajax({
+                type: "Post"
+                , data: { Id: __id }
+                , datatype: "json"
+                , url: "/Adv/ReviewRemove"
+                , success: function (data) {
+                    var __itemCS = $("#review_" + __id);
+                    __itemCS.remove();
+
+                }
+                , error: function (_ex) { alert("Failed (ERROR!) " + _ex.statusText+"  "+_ex.statusCode + "  "+_ex.responseText); }
+            });
+        });
+
+        function reviewRemoveBtn_Click(__id)
+        {
+            var __item = $('#message-text-remove');
+            __item.empty();
+            __item.append($('#note_' + __id).text());
+            __item.attr("data-id", __id);
+
+            $('#modalRemoveLabel').text("Remove review #"+__id);
+        }
+    </script>
+
+    <div id="addNewReview"></div>
+}
+
+@if (0 < Model.Reviews.Count)
+{
+    foreach (var item in Model.Reviews.OrderByDescending(zzz => zzz.DateUpdated))
+    {
+        @Html.Partial("PetReviewDetails", item);
+    }
+}

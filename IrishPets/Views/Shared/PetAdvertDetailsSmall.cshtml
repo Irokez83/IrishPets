@@ -1,0 +1,21 @@
+﻿@model IrishPets.Models.PetAdvert
+
+<div class="pet_sidebar">
+    <u>Period of validity</u>:<br />
+    <small>start: <strong>@Html.DisplayFor(model => Model.DateShowStart)</strong></small><br />
+    <small>end: <strong>@Html.DisplayFor(model => Model.DateShowEnd)</strong></small>
+
+    @if (Model.Type == IrishPets.Models.AdvertType.Notification_Advert && 0 < Model.FirstPrice)
+    {
+        if (Model.TypeOfSale == IrishPets.Models.TypeOfSale.Commercial)
+        {
+            <p>Price: <strong style="color:orangered">@Model.FirstPrice €</strong></p>
+            <p class="title_home price">PRiORITY</p>
+        }
+        else
+        {
+            <p>Price: <strong>@Html.DisplayFor(model => Model.FirstPrice)</strong> €</p>
+        }
+    }
+
+</div>

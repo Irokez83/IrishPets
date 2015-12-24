@@ -1,0 +1,23 @@
+﻿@model IrishPets.Models.PetReview
+
+<div id="review_@Model.Id">
+    <hr class="featurette-divider">
+
+    <div class="row">
+        <div  class="body-content">
+            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+            <small>
+                @Html.DisplayFor(model => Model.DateCreated, new { @class = "panel-body" })
+                @Html.DisplayFor(model => Model.Member.UserName, new { @class = "panel-body" })
+            </small>
+
+            @if (Model.IsOwner(User) || User.IsInRole("Admin"))
+            {
+                <button type='button' class='btn btn-success btn-xs' data-toggle='modal' data-target='#reviewModal' data-dismiss='modal' id="reviewEditBtn" data-id="@Model.Id" onclick="reviewEditBtn_Click(@Model.Id)"> edit </button>
+                <button type='button' class='btn btn-danger btn-xs' data-toggle='modal' data-target='#reviewRemoveModal' data-dismiss='modal' id="reviewRemoveBtn" data-id="@Model.Id" onclick="reviewRemoveBtn_Click(@Model.Id)"> remove </button>
+            }
+
+            <p id='note_@Model.Id'>@Html.DisplayFor(model => model.Note, new { htmlAttributes = new { @class = "form-control" } })</p>
+        </div>
+    </div>
+</div>

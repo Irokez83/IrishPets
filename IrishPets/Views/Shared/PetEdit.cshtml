@@ -1,0 +1,110 @@
+﻿@model IrishPets.Models.PetEditViewModel
+
+<div class="form-horizontal">
+        <div class="form-group">
+            @Html.HiddenFor(model => model.AdvertType)
+            @Html.HiddenFor(model => model.Pet.Id)
+            @Html.HiddenFor(model => model.Pet.MemberId)
+            @Html.HiddenFor(model => model.ReturnUrl)
+
+
+            <div class="row">
+                @Html.LabelFor(model => model.Pet.Name, "Title", new { @class = "control-label col-md-2" })
+                <div class="controls col-md-3">
+                    @Html.EditorFor(model => model.Pet.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "Title" } })
+                    @Html.ValidationMessageFor(model => model.Pet.Name, null, new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                @Html.LabelFor(model => model.Pet.DateOfBirth, new { @class = "control-label col-md-2" })
+                <div class="col-md-3" id="sandbox-container">
+                    <div class="input-group date">
+                        @Html.EditorFor(model => model.Pet.DateOfBirth, new { htmlAttributes = new { @id = "dp", @class = "form-control", size = "16", type = "text", placeholder = "Enter Date of Birth" } })
+                        @Html.ValidationMessageFor(model => model.Pet.DateOfBirth, null, new { @class = "text-danger" })
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                @Html.LabelFor(model => model.Pet.Gender, "Sex", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-4">
+                    @Html.EnumDropDownListFor(model => model.Pet.Gender, "Please select a Sex", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Pet.Gender, null, new { @class = "text-danger" })
+                </div>
+            </div>
+
+           <div class="row">
+                @Html.LabelFor(model => model.Kind, null, new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.DropDownListFor(model => model.Kind.Id, Model.Kinds, "Please select a Kind", new { @class = "form-control", @id = "ddlKind" } )
+                    @Html.ValidationMessageFor(model => model.Pet.CoatColour, null, new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                @Html.LabelFor(model => model.Breed, null, new { @class = "control-label col-md-2" })
+                <div class="col-md-3" id="Breeds">
+                    @Html.DropDownListFor(model => model.Breed.Id, Model.Breeds, "Please select a Breed", new { @class = "form-control", @id = "ddlBreeds" } )
+                    @Html.ValidationMessageFor(model => model.Breed.Id, null, new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                @Html.LabelFor(model => model.Pet.CoatColour, null, new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.Pet.CoatColour, new { htmlAttributes = new { @class = "form-control", placeholder = "Coat colour" } } )
+                    @Html.ValidationMessageFor(model => model.Pet.CoatColour, null, new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                @Html.LabelFor(model => model.Pet.Weight, null, new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.Pet.Weight, new { htmlAttributes = new { @class = "form-control", placeholder = "Weight" } })
+                    @Html.ValidationMessageFor(model => model.Pet.Weight, null, new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                @Html.LabelFor(model => model.Pet.Note, "Description", new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.TextAreaFor(model => model.Pet.Note, 15, 30, new { @class = "form-control", placeholder = "Description" } )
+                    @Html.ValidationMessageFor(model => model.Pet.Note, null, new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+@Styles.Render("~/Content/bootstrap-datepicker3.min.css")
+@Scripts.Render("~/Scripts/bootstrap-datepicker.min.js")
+@Scripts.Render("~/Scripts/calendar_ex.js")
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#ddlKind').change(function () {
+            $.ajax({
+                type: "post",
+                url: '@Url.Action("GetBreeds")', 
+                data: { _id: $('#ddlKind').val() },
+                datatype: "json",
+                traditional: true,
+                success: function (data) {
+                    var __breed = "<select id='ddlBreeds' class='form-control' name='Breed.Id'><option Value=''>Please select a Breed </option>";
+
+                    for (var i = 0; i < data.length; i++)
+                    {
+                        __breed = __breed + '<option Value=' + data[i].Value + '>' + data[i].Text + '</option>';
+                    }
+
+                    __breed = __breed + '</select>';
+
+                    $('#Breeds').html(__breed);
+                },
+                error: function (ex) { alert('Failed to retrieve Breeds.' + ex); }
+            });
+        });
+    });
+</script>

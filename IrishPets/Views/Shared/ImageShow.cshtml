@@ -1,0 +1,27 @@
+﻿@using IrishPets.Core
+@model IrishPets.Models.Pet
+
+
+@if (null != Model.Image)
+{
+    @Html.Raw("<img src=\"data:image/jpeg;base64," + Convert.ToBase64String(Model.Image.Image) + "\" class='img-rounded' />")
+}
+else
+{
+    @*if (Model.Breed.Kind.Name == "Cat")
+    {
+        @Html.ImgTag("~/Content/Images/hero_breeder_empty.jpg", @Html.DisplayFor(model => Model.Name).ToString()).WithDensities(2, 3).WithSize(300, 200)
+    }
+    else if (Model.Breed.Kind.Name == "Dog")
+    {
+        @Html.ImgTag("~/Content/Images/hero_breeder_dog_empty.jpg", @Html.DisplayFor(model => Model.Name).ToString()).WithDensities(2, 3).WithSize(300, 200)
+    }*@
+    @Html.ImgTag("~/Content/Images/Photo-Unavailable.gif", @Html.DisplayFor(model => Model.Name).ToString())
+
+}
+
+
+@if (Model.IsOwner(User))
+{
+    <div>@Html.ActionLink(" Change picture ", "ImageLoad", new { @PetId = Model.Id })</div>
+}

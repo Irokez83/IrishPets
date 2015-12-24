@@ -1,0 +1,27 @@
+﻿@model IrishPets.Models.PetService
+
+<h3>
+    Pet Service <a class="btn btn-warning btn-xs" role="button" href="~/PetService/Index">← Back to list</a>
+</h3>
+
+<hr class="featurette-divider">
+
+<div class="row thumbnail">
+    <h4>
+        @if (User.IsInRole("Admin"))
+        {
+            @Html.ActionLink("Remove", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger btn-xs", role = "button" })
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-success btn-xs", role = "button" })
+        }
+
+        @Html.ActionLink(Model.Name, "Details", new { id = Model.Id })
+    </h4>
+
+    <address class="body-content">
+        <abbr title="Phone">Phone:</abbr> <strong>@Html.DisplayFor(model => Model.PhoneNumber)</strong>
+        <abbr title="E-mail">E-mail:</abbr> <strong>@Html.DisplayFor(model => Model.Email)</strong>
+        <div>@Html.DisplayFor(model => Model.Address)</div>
+    </address>
+
+    <div class="body-content">@Html.Raw(Model.Note)</div>
+</div>

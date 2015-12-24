@@ -1,0 +1,25 @@
+﻿{
+  "AdvAdas": [
+    {
+      "Note": "Message №1:\n\r\n\rPease register in order to use full website functionality. Valid e-mail address required as confirmation will be sent. Check your spam e-mail folder for e-mail from irishpetsproject@gmail.com.\n\r\n\r\n\r                                                 © Admin",
+      "DateShowStart": "2015-12-10 00:00:00",
+      "DateShowEnd": "2016-12-10 00:00:00",
+      "IsShow": true,
+      "Enable": true
+    },
+    {
+      "Note": "Message №2:\n\r\n\rUse Contact Us link on the bottom of the webpage in order to send us complaints, feedbacks, suggestions.\n\r\n\r\n\r\n\r\n\r                                                 © Admin",
+      "DateShowStart": "2015-12-10 00:00:00",
+      "DateShowEnd": "2016-12-10 00:00:00",
+      "IsShow": true,
+      "Enable": true
+    },
+    {
+      "Note": "Message №3:\n\r\n\rPlease be aware that you have to create your pet first (dog or cat only) and then you can publish it in any of the website categories.\n\r\n\r\n\r\n\r                                                 © Admin",
+      "DateShowStart": "2015-12-10 00:00:00",
+      "DateShowEnd": "2016-12-10 00:00:00",
+      "IsShow": true,
+      "Enable": true
+    }
+  ]
+}

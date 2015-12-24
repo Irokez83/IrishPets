@@ -1,0 +1,128 @@
+﻿{
+  "PetServices": [
+    {
+      "Name": "BrayVet",
+      "Note": "BrayVet is a friendly veterinary practice where pets are recognised as members of the family. We pride ourselves on providing the highest quality healthcare for your pet in a relaxed atmosphere where you will feel quite comfortable discussing the needs of your companion.",
+      "Email": "info@brayvet.com",
+      "PhoneNumber": "+353 (1) 2821909",
+      "Street": "Old Connaught Avenue",
+      "Town": "Bray",
+      "CountyId": 32,
+      "HouseNameNo": null,
+      "Enable": true
+    },
+    {
+      "Name": "Ashbourne Veterinary Clinic",
+      "Note": "All pets are seen as family members. No matter how big or small their problem is, we have the experience and love of animals that can help you through it all.",
+      "Email": "ashbourne@activevetcare.ie",
+      "PhoneNumber": "+353 (1) 8499973",
+      "Street": "Castle Street",
+      "Town": "Ashbourne",
+      "CountyId": 22,
+      "HouseNameNo": "4 Segrave Square",
+      "Enable": true
+    },
+    {
+      "Name": "Fairview Vet Hospital",
+      "Note": "Fairview Veterinary Hospital was set up in 1974 by Michael Tuite snr MRCVS, and for the last 40 years has been providing top quality veterinary care to our clients on the Northside of Dublin and beyond.",
+      "Email": "fairviewvet@gmail.com",
+      "PhoneNumber": "+353 (1) 8338217",
+      "Street": "13 Fairview Strand",
+      "Town": "D3",
+      "CountyId": 9,
+      "HouseNameNo": null,
+      "Enable": true
+    },
+    {
+      "Name": "Groome Vets",
+      "Note": "We are a family owned veterinary practice which operates from our hospital in Kildare town.",
+      "Email": "info@groomevets.ie",
+      "PhoneNumber": "+353 (45) 521507",
+      "Street": "South Green Road",
+      "Town": "Kildare town",
+      "CountyId": 13,
+      "HouseNameNo": null,
+      "Enable": true
+    },
+    {
+      "Name": "Ark Vets",
+      "Note": "Ark Vets Galway is first and foremost a Companion Animal Veterinary Practice that helps family pets and is dedicated to the idea that healthy pets are happy pets. ",
+      "Email": "aine@arkvetsgalway.com",
+      "PhoneNumber": "+353 (91) 584185",
+      "Street": "St Mary’s Rd (opposite St Mary’s College)",
+      "Town": "Galway",
+      "CountyId": 11,
+      "HouseNameNo": null,
+      "Enable": true
+    },
+    {
+      "Name": "O'Shea and Bramley Veterinary Centre",
+      "Note": "Our passionate care and understanding is balanced with old fashioned respect for patients and clients alike.",
+      "Email": "theveterinarycentre@eircom.net",
+      "PhoneNumber": "+353 (53) 9145755",
+      "Street": "Distillery Road",
+      "Town": "Wexford",
+      "CountyId": 31,
+      "HouseNameNo": null,
+      "Enable": true
+    },
+    {
+      "Name": "Donegal Veterinary Clinic",
+      "Note": "With seven vets, four nurses, a 24 hour emergency service, and state of the art facilities, here you can be assured of individual attention from a caring, professional team.",
+      "Email": "vet@iol.ie",
+      "PhoneNumber": "+353 (74) 9723009",
+      "Street": "Sligo Road",
+      "Town": "Donegal",
+      "CountyId": 7,
+      "HouseNameNo": "Grange",
+      "Enable": true
+    },
+    {
+      "Name": "Petvet Waterford",
+      "Note": "We are dedicated to providing a high standard of pet vet care in a professional and compassionate manner.",
+      "Email": "petvet.waterford@gmail.com",
+      "PhoneNumber": "+353 (51) 326326",
+      "Street": "Tramore Road",
+      "Town": "Waterford",
+      "CountyId": 31,
+      "HouseNameNo": "Ivory Retail Park",
+      "Enable": true
+    },
+    {
+      "Name": "DSPCA Clinic",
+      "Note": "The Dublin Society for Prevention of Cruelty to Animals (DSPCA) is a registered charity, established in 1840 to prevent cruelty to animals and is now Ireland's largest animal welfare organisation.",
+      "Email": "vetclinic@dspca.ie",
+      "PhoneNumber": "+353 (1) 499 4780",
+      "Street": "Mount Venus Road",
+      "Town": "Rathfarnham",
+      "CountyId": 9,
+      "HouseNameNo": null,
+      "Postcode": "D16",
+      "Enable": true
+    },
+    {
+      "Name": "UCD Veterinary Hospital",
+      "Note": "Unique environment that prides itself on its specialty services, dedicated internationally recognised staff and modern equipment serving the needs of the veterinary profession and the animal owning public.",
+      "Email": "vethospital@ucd.ie",
+      "PhoneNumber": "+353 (1) 716 6000",
+      "Street": "University College Dublin Campus",
+      "Town": "Belfield",
+      "CountyId": 9,
+      "HouseNameNo": null,
+      "Postcode": "D4",
+      "Enable": true
+    },
+    {
+      "Name": "Gilabbey Veterinary Hospital",
+      "Note": "We endeavour to provide our patients with first class veterinary care, along with having a friendly approachable, honest, sympathetic and respectful manner. The welfare of our pets is always our foremost thought.",
+      "Email": "gilabvet@iol.ie",
+      "PhoneNumber": "+353 (21) 496 2799",
+      "Street": "Vicars Road",
+      "Town": "Togher",
+      "CountyId": 6,
+      "HouseNameNo": null,
+      "Postcode": "T12",
+      "Enable": true
+    }
+  ]
+}

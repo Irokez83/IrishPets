@@ -1,0 +1,27 @@
+﻿@model IrishPets.Models.PetAdvsEditViewModel
+
+@{ ViewBag.Title = "Edit " + Model.Member.Email; }
+
+<h3>
+    <small> Edit info </small> @Model.Member.Email
+    <a href="@Model.ReturnUrl" class="btn btn-warning btn-xs" role="button"> &larr; Back </a>
+</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.ReturnUrl)
+
+    <div>
+        @Html.ValidationSummary(true, null)
+
+        @Html.Partial("ContactInfoEdit2", Model.ChangeInfoViewModel)
+
+        <div class="row">
+            <div class="col-sm-6 col-md-4">
+                <a href="@Model.ReturnUrl" class="btn btn-warning" role="button">&larr; Back</a>
+                <button type="submit" class="btn btn-success">Save</button>
+            </div>
+        </div>
+    </div>
+}

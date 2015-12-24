@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @*<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,300" type="text/css">*@
+
+    <title>@ViewBag.Title – Irish Pets - Peace-of-Mind Protection for your Family Pets</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+
+<body>
+    <noscript><div><h2>This Webservice requires JavaScript</h2></div></noscript>
+
+    <div class="navbar navipet-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("    ", "Index", "Home", null, new { @class = "glyphicon glyphicon-home", style = "margin-top: 17px" })
+            </div>
+
+            <div class="navbar-collapse collapse nav-pills nav-stacked">
+                <ul class="nav navbar-nav">
+                    <li class="menu-adopt navi">@Html.ActionLink(" Adopt ", "Index", "Adv", routeValues: new { t = (int)IrishPets.Models.AdvertType.Notification_Advert }, htmlAttributes: new { @class= "navipet-text" })</li>
+                    <li class="menu-pet-breeding navi">@Html.ActionLink(" Breeding", "Index", "Adv", routeValues: new { t = (int)IrishPets.Models.AdvertType.Notification_Breeding }, htmlAttributes: new { @class = "navipet-text" })</li>
+                    <li class="menu-lost-found navi">@Html.ActionLink(" Lost&Found", "Index", "Adv", routeValues: new { t = (int)IrishPets.Models.AdvertType.Notification_LostAndFound }, htmlAttributes: new { @class = "navipet-text" })</li>
+                    <li class="menu-pet-services navi">@Html.ActionLink(" Pet Services ", "Index", "PetService", null, new { @class = "navipet-text" })</li>
+
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li class="menu-pet-image navi">
+                            <a href="#" class="dropdown-toggle navipet-text" data-toggle="dropdown"> My Zone <strong class="caret"></strong></a>
+
+                            <ul class="dropdown-menu navipet-inverse navbar-nav" role="menu">
+                                <li class="menu-pet-my navi navipet-text">@Html.ActionLink(" My Pets ", "Index", "Pet", routeValues: new { }, htmlAttributes: new { @class = "navipet-text" })</li>
+
+                                <li class="divider" />
+                                <li class="menu-adopt navi">@Html.ActionLink(" My Adopt", "Index", "Adv", routeValues: new { t = 1, u = 1 }, htmlAttributes: new { })</li>
+                                <li class="menu-pet-breeding navi">@Html.ActionLink(" My Breeding", "Index", "Adv", routeValues: new { t = 2, u = 1 }, htmlAttributes: new { @class = "navipet-text" })</li>
+                                <li class="menu-lost-found navi">@Html.ActionLink(" My Lost&Found", "Index", "Adv", routeValues: new { t = 3, u = 1 }, htmlAttributes: new { @class = "navipet-text" })</li>
+                            </ul>
+                        </li>
+                    }
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="menu-pet-my navi">
+                            <a href="#" class="dropdown-toggle navipet-text" data-toggle="dropdown"> Admin Zone <strong class="caret"></strong></a>
+
+                            <ul class="dropdown-menu navipet-inverse navbar-nav" role="menu">
+                                <li class="navi menu-users"> @Html.ActionLink(" Users ", "Index", "Ada", routeValues: new { }, htmlAttributes: new { @class = "navipet-text" }) </li>
+                                <li class="navi menu-users"> @Html.ActionLink(" News of Site ", "Index", "AdvAda", routeValues: new { }, htmlAttributes: new { @class = "navipet-text" }) </li>
+                                <li class="divider" />
+                                <li class="navi menu-pet-image"> @Html.ActionLink(" Images ", "PetImages", "Ada", routeValues: new { }, htmlAttributes: new { @class = "menu-pet-image" }) </li>
+                            </ul>
+                        </li>
+                    }
+                </ul>
+
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <div>&copy; @DateTime.Now.Year – @Html.ActionLink(" " + @IrishPets.Properties.Resources.DefDomain + "  ", "Index", "Home") | 
+                @Html.ActionLink("ContactUs  ", "Contact", "Home", null, new { @class = "glyphicon glyphicon-phone-alt" }) | 
+                @Html.ActionLink("About ", "About", "Home", null, new { @class = "glyphicon glyphicon-info-sign" })
+            </div>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

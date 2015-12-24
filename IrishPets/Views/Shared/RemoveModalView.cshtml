@@ -1,0 +1,54 @@
+﻿
+
+<div id="removeModal" class="modal" tabindex="-1" aria-labelledby="removeModalLabel" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalRemoveLabel">Remove</h4>
+            </div>
+
+            <form role="form">
+                <div id="message-text-remove" class="modal-body"></div>
+            </form>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="removeBtn" type="button" class="btn btn-danger" data-dismiss="modal">Remove</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@Scripts.Render("~/bundles/jquery")
+
+<script>$('#removeBtn').click(function (e)
+        {
+            var __item = $('#message-text-remove');
+            var __id = __item.attr("data-id");
+
+            $.ajax({
+                type: "Post"
+                , data: { Id: __id }
+                , datatype: "json"
+                , url: "/Adv/ReviewRemove"
+                , success: function (data) {
+                    var __itemCS = $("#review_" + __id);
+                    __itemCS.remove();
+
+                }
+                , error: function (_ex) { alert("Failed (ERROR!) " + _ex.statusText+"  "+_ex.statusCode + "  "+_ex.responseText); }
+            });
+        });
+
+        function reviewRemoveBtn_Click(__id)
+        {
+            var __item = $('#message-text-remove');
+            __item.empty();
+            __item.append($('#note_' + __id).text());
+            __item.attr("data-id", __id);
+
+            $('#modalRemoveLabel').text("Remove #"+__id);
+        }
+</script>

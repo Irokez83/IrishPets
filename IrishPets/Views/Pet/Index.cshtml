@@ -1,0 +1,58 @@
+﻿@using System.Linq;
+@using IrishPets.Core;
+@model IrishPets.Models.PetsViewModel
+
+@{ ViewBag.Title = "Pets"; }
+
+<div class="row  background_bubbles">
+    <h3>My Pets: @Html.ActionLink("Create New my Pet", "Create", "Pet", null, new { @class = "btn btn-success btn-xs", role = "button" })</h3>
+</div>
+
+
+<br />
+@using (Html.BeginForm())
+{
+    <div class="panel-group modal-content">
+        <button type="submit" class="btn btn-success">Filter</button>
+
+        <div class="col-sm-3">
+            <strong>Text to find</strong>: @Html.TextBox("q", null, new { @class = "form-control", @placeholder = "Text of filter" })
+        </div>
+    </div>
+}
+
+<br />
+
+<div class="container">
+    @foreach (var item in Model.Pets)
+    {
+        <hr class="featurette-divider" />
+        <div class="row">
+            <h4>
+                @Html.ActionLink(" Remove ", "Remove", new { id = item.Id }, new { @class = "btn btn-danger btn-xs", role = "button" })
+                @Html.ActionLink(" Edit ", "Edit", new { id = item.Id }, new { @class = "btn btn-success btn-xs", role = "button" })
+                @Html.ActionLink(item.Name, "Details", new { id = item.Id })
+            </h4>
+
+            @*Create New:
+                @Html.ActionLink("General Ad", "WizEdit", "Adv", new { p = item.Id, t = (int)IrishPets.Models.AdvertType.Notification_Advert }, htmlAttributes: new { @class = "btn btn-success btn-xs", type = "button" })
+                @Html.ActionLink("Breeding Ad", "WizEdit", "Adv", new { p = item.Id, t = (int)IrishPets.Models.AdvertType.Notification_Breeding }, htmlAttributes: new { @class = "btn btn-info btn-xs", type = "button" })
+                @Html.ActionLink("Lost & Found Ad", "WizEdit", "Adv", new { p = item.Id, t = (int)IrishPets.Models.AdvertType.Notification_LostAndFound }, htmlAttributes: new { @class = "btn btn-primary btn-xs", type = "button" })
+                @Html.ActionLink("Remove Pet: "+ item.Name, "Remove", "Pet", routeValues: new { id = item.Id }, htmlAttributes: new { @class = "btn btn-danger btn-xs", type = "button" })
+            *@
+
+            <div class="col-sm-3 thumbnail">
+                @Html.Partial("PetDetailsSmall", item)
+                <div>@Html.DisplayFor(model => item.Member.UserName)</div>
+            </div>
+
+            <div class="col-sm-5 thumbnail">@Html.Partial("PetImage", item)</div>
+            <div class="col-sm-4 thumbnail">
+                @if (!string.IsNullOrEmpty(item.Note))
+                {
+                    @Html.Raw(item.Note.Replace(System.Environment.NewLine, "<br/>"))
+                }
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,17 @@
+﻿@model IrishPets.Models.PetService
+
+<h3> New Pet Service </h3>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, string.Empty)
+    @Html.Partial("PetServiceEdit")
+
+    <div class="row">
+        <div class="col-sm-6 col-md-4">
+            <a class="btn btn-warning" role="button" href="/PetService/Index">&larr; Back</a>
+            <button type="submit" class="btn btn-success">Save</button>
+        </div>
+    </div>
+}

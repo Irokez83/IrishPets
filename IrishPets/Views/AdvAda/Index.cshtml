@@ -1,0 +1,29 @@
+﻿@model IrishPets.Models.AdvAdasViewModel
+
+@{ ViewBag.Title = "Administastion News"; }
+
+@using (Html.BeginForm())
+{
+    <h3>
+        @ViewBag.Title: @Html.ActionLink("Create New", "Edit", "AdvAda", routeValues: new { }, htmlAttributes: new { @class = "btn btn-success", role = "button" })
+        @Html.TextBox("q", null, new { @placeholder = "Search" })<button type="submit">GO</button>
+    </h3>
+}
+
+@foreach (var item in Model.Items)
+{
+    <div class="row featurette">
+        <div class="row col-sm-12 modal-content" style="position: relative; transition: background .2s;">
+            <div style="border: 1px solid rgb(0, 255, 33); position: relative; transition: background .2s; border-radius: 1px; border-radius: 5px; margin-top: 5px; margin-bottom:5px;">
+                <div style="margin-left:5px">
+                    @Html.ActionLink(" Remove ", "Remove", new { id = item.Id }, new { @class = "btn btn-danger btn-xs", role = "button" })
+                    @Html.ActionLink(" Edit ", "Edit", new { id = item.Id }, new { @class = "btn btn-success btn-xs", role = "button" })
+
+                    <small>  Start show: <strong>@Html.DisplayFor(model => item.DateShowStart)</strong></small> 
+                    <small>  end: <strong>@Html.DisplayFor(model => item.DateShowEnd)</strong></small>
+                    <p>@Html.Raw(item.Note?.Replace(System.Environment.NewLine, "<br/>"))</p>
+                </div>
+            </div>
+        </div>
+    </div>
+}

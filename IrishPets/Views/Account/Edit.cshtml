@@ -1,0 +1,30 @@
+﻿@model IrishPets.Models.RegisterViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit your profile</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        @Html.ValidationSummary(true, string.Empty)
+        <div>
+            <p>E-mail: @Html.EditorFor(model => model.Email)</p>
+        </div>
+
+        <div>
+            <p>Nick: @Html.EditorFor(model => model.UserName)</p>
+        </div>
+
+        <div>
+            <input type="submit" value="Save" />
+        </div>
+    </div>
+}
+
+
+

@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{1C7C526B-E47A-4C27-BBEC-985E8A18CACA}"
+	ProjectSection(SolutionItems) = preProject
+		SolutionItems\AssemblySharedInfo.cs = SolutionItems\AssemblySharedInfo.cs
+		SolutionItems\AssemblyVersionInfo.cs = SolutionItems\AssemblyVersionInfo.cs
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IrishPets.ie", "IrishPets\IrishPets.ie.csproj", "{BDE9EE48-AE6E-49A4-9597-3C00C5DA2B23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IrishPets.UnitTests", "UnitTestProject1\IrishPets.UnitTests.csproj", "{30E73FA4-2F60-42A5-A747-C8758D5527A3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BDE9EE48-AE6E-49A4-9597-3C00C5DA2B23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDE9EE48-AE6E-49A4-9597-3C00C5DA2B23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDE9EE48-AE6E-49A4-9597-3C00C5DA2B23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDE9EE48-AE6E-49A4-9597-3C00C5DA2B23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30E73FA4-2F60-42A5-A747-C8758D5527A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30E73FA4-2F60-42A5-A747-C8758D5527A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30E73FA4-2F60-42A5-A747-C8758D5527A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30E73FA4-2F60-42A5-A747-C8758D5527A3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

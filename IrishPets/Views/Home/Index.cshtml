@@ -1,0 +1,60 @@
+﻿@using IrishPets.Core
+@model IrishPets.Models.HomeViewModel
+@{
+    ViewBag.Title = "Irish Pets";
+}
+
+
+<div>
+    @Scripts.Render("~/Scripts/CookieWarning.js")
+
+    <blockquote>
+        <p>Humanity is not determined by how we treat others. Humanity is determined by the way we treat animals.</p>
+        <cite><small>Chuck Palahniuk</small></cite>
+    </blockquote>
+
+    <h1 class="text-center background_bubbles" style="font-size:50px; font-family: Cursive"><i>I</i>rish <strong class="title_home">Pets</strong></h1>
+
+
+    <hr />
+
+    <div class="row featurette">
+        @foreach (var item in Model.AdvPets)
+        {
+            <div class="col col-md-4 col-sm-6 modal-content story" style="height: 400px">
+
+                <div class="text-center">
+                    <a href='@Url.Action("Details", "Adv", routeValues: new { id = item.Id, t = (int)item.Type })'>
+                        <span class="title">@item.Pet.Name</span>
+                        @if (null != item.Pet.Image)
+                        {
+                            @Html.Raw("<img id=Image" + item.Pet.Id + " src=\"data:" + item.Pet.Image.ContentType + "; base64," + Convert.ToBase64String(item.Pet.Image.Image) + "\" class='img-rounded' />")
+                        }
+                        else
+                        {
+                            @Html.ImgTag("~/Content/Images/Photo-Unavailable.gif", @Html.DisplayFor(model => item.Pet.Name).ToString())
+                        }
+                        <h4 class="caption">@item.Name</h4>
+                    </a>
+                </div>
+
+                <div>@Html.Raw(item.NoteShort?.Replace(System.Environment.NewLine, "<br/>"))</div>
+            </div>
+        }
+    </div>
+
+    <hr />
+
+    <div class="row featurette">
+        @foreach (var item in Model.AdvAdas)
+        {
+            <div class="col col-md-4 col-sm-6 modal-content" style="position: relative; transition: background .2s; height: 150px" >
+                <div>
+                    <div style="margin-left:5px">
+                        <p>@Html.Raw(item.Note?.Replace(System.Environment.NewLine, "<br/>"))</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
