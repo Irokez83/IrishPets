@@ -242,7 +242,6 @@
     <Compile Include="ModelViews\PetServiceViewModel.cs" />
     <Compile Include="ModelViews\RegisterViewModel.cs" />
     <Compile Include="Models\Member.cs" />
-    <Compile Include="Models\MemberReview.cs" />
     <Compile Include="Models\ModelBase.cs" />
     <Compile Include="Models\ModelBaseId.cs" />
     <Compile Include="Models\ModelBaseId_Ex.cs" />
@@ -253,13 +252,9 @@
     <Compile Include="Models\Pet\PetReview.cs" />
     <Compile Include="Models\Pet\PetImage.cs" />
     <Compile Include="Models\County.cs" />
-    <Compile Include="Models\Enums\CatalogType.cs" />
     <Compile Include="Models\Enums\Gender.cs" />
     <Compile Include="Models\Enums\NotificeType.cs" />
     <Compile Include="Models\Enums\PermissionRole.cs" />
-    <Compile Include="Models\Enums\PetDog_ExProperty.cs" />
-    <Compile Include="Models\Enums\Pet_ExProperty.cs" />
-    <Compile Include="Models\Enums\ReviewType.cs" />
     <Compile Include="Models\Enums\TypeOfSale.cs" />
     <Compile Include="ModelViews\ContactInfoViewModel2.cs" />
     <Compile Include="ModelViews\ContactInfoViewModel.cs" />

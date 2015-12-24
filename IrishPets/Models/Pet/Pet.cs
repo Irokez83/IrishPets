@@ -42,8 +42,8 @@ namespace IrishPets.Models
         [StringLength(25, ErrorMessage = " Error: field [Weight] has more 25 chars")]
         public string Weight { get; set; }
 
-        /// <summary> Additional info for cats and dogs </summary>
-        public Pet_ExProperty ExProperty { get; set; }
+        ///// <summary> Additional info for cats and dogs </summary>
+        //public Pet_ExProperty ExProperty { get; set; }
 
         /// <summary> Advertisement notes </summary>
         public virtual ICollection<PetAdvert> Adverts { get; set; }

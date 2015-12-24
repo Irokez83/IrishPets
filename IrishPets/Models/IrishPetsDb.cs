@@ -17,7 +17,7 @@
         #region Member & Ext
 
         public DbSet<County> Counties { get; set; }
-        public DbSet<MemberReview> MemberReviews { get; set; }
+        //public DbSet<MemberReview> MemberReviews { get; set; }
         public DbSet<PetService> PetServices { get; set; }
         // public DbSet<Tariff> Tariffs { get; set; }
         //public DbSet<Transaction> Transactions { get; set; }

@@ -76,8 +76,8 @@ namespace IrishPets.Models
         /// <summary> User pets </summary>
         public virtual ICollection<Pet> Pets { get; set; }
 
-        /// <summary> Reviews </summary>
-        public virtual ICollection<MemberReview> MemberReviews { get; set; }
+        ///// <summary> Reviews </summary>
+        //public virtual ICollection<MemberReview> MemberReviews { get; set; }
 
         /// <summary> Pet reviews </summary>
         public virtual ICollection<PetReview> PetReviews { get; set; }

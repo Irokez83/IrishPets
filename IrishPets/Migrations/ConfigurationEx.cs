@@ -745,7 +745,7 @@ namespace IrishPets.Migrations
             __item.Weight = "2 kg";
 
             __item.DateOfBirth = DateTime.Now.AddDays(-30);
-            __item.ExProperty = Pet_ExProperty.HealthTests;
+            //__item.ExProperty = Pet_ExProperty.HealthTests;
             __item.Enabled = true;
 
             //_context.Pets.Add(__item);
@@ -771,7 +771,7 @@ namespace IrishPets.Migrations
             __item.Weight = "2 kg";
 
             __item.DateOfBirth = DateTime.Now.AddDays(-30);
-            __item.ExProperty = Pet_ExProperty.HealthTests;
+            //__item.ExProperty = Pet_ExProperty.HealthTests;
             __item.Enabled = true;
 
             //_context.Pets.Add(__item);

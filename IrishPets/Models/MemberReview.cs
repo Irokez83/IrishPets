@@ -7,12 +7,12 @@
     {
         public MemberReview() : base()
         {
-            this.Type = ReviewType.Unknow;
+            //this.Type = ReviewType.Unknow;
         }
 
         [DataType(DataType.MultilineText)]
         public string Note { get; set; }
-        public ReviewType Type { get; set; }
+        //public ReviewType Type { get; set; }
 
         #region Member
 

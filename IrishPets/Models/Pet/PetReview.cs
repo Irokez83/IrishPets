@@ -13,12 +13,12 @@ namespace IrishPets.Models
 
         public PetReview() : base()
         {
-            this.Type = ReviewType.Unknow;
+            //this.Type = ReviewType.Unknow;
         }
 
         public PetReview(int _petId, string _memberId, string _note) : base()
         {
-            this.Type = ReviewType.Unknow;
+            //this.Type = ReviewType.Unknow;
             this.PetId = _petId;
             this.MemberId = _memberId;
             this.Note = _note;
@@ -39,7 +39,7 @@ namespace IrishPets.Models
             }
         }
 
-        public ReviewType Type { get; set; }
+        //public ReviewType Type { get; set; }
 
         #region Pet
 
